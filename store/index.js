@@ -5,7 +5,9 @@ export const state = () => ({
     {english: 'water', spanish: 'agua'},
     {english: 'yes', spanish: 'sí'},
     {english: 'nothing', spanish: 'nada'}
-  ]
+  ],
+  word: null,
+
 })
 
 export const actions = {}
@@ -19,6 +21,9 @@ export const mutations = {
   },
   increaseIteration(state) {
     state.iteration += 1
+  },
+  setWord(state, word) {
+    state.word = word
   }
 }
 
@@ -31,5 +36,8 @@ export const getters = {
   },
   words(state) {
     return state.words
+  },
+  word(state) {
+    return state.word
   }
 }
