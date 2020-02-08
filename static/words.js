@@ -76,13 +76,4 @@ function beginSpeechRecognition() {
     }
 }
 
-window.onload = function () {
-    if (!(window.webkitSpeechRecognition) && !(window.speechRecognition)) {
-        upgradeAlert();
-        hideButton();
-        titleForNonChromeUsers();
-    } else {
-        const button = document.getElementById('begin');
-        button.addEventListener("click", beginSpeechRecognition);
-    }
-}
+export { beginSpeechRecognition }
