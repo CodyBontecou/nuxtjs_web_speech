@@ -16,7 +16,7 @@ export default {
     ],
     script: [
       { src: 'speak.js'},
-      { src: 'words.js'}
+      { src: 'words.js', type: 'module'}
     ]
   },
   /*
