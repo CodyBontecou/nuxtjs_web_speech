@@ -6,8 +6,8 @@ export const state = () => ({
     {english: 'yes', spanish: 'sí'},
     {english: 'nothing', spanish: 'nada'}
   ],
-  word: null,
-
+  answer: null,
+  initial: null
 })
 
 export const actions = {}
@@ -22,8 +22,11 @@ export const mutations = {
   increaseIteration(state) {
     state.iteration += 1
   },
-  setWord(state, word) {
-    state.word = word
+  setAnswer(state, answer) {
+    state.word = answer
+  },
+  setInitial(state, initial) {
+    state.initial = initial
   }
 }
 
@@ -37,7 +40,10 @@ export const getters = {
   words(state) {
     return state.words
   },
-  word(state) {
-    return state.word
+  answer(state) {
+    return state.answer
+  },
+  initial(state) {
+    return state.initial
   }
 }
