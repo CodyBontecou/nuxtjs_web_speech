@@ -17,6 +17,7 @@
     "@nuxtjs/dotenv": "^1.4.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^1.0.0"
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.10.3"
   }
 }
