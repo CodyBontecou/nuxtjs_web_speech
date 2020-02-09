@@ -7,7 +7,8 @@ export const state = () => ({
     {english: 'nothing', spanish: 'nada'}
   ],
   answer: null,
-  initial: null
+  initial: null,
+  drawer: false
 })
 
 export const actions = {}
@@ -27,6 +28,9 @@ export const mutations = {
   },
   setInitial(state, initial) {
     state.initial = initial
+  },
+  setDrawer(state, boolean) {
+    state.drawer = boolean
   }
 }
 
@@ -45,5 +49,8 @@ export const getters = {
   },
   initial(state) {
     return state.initial
+  },
+  drawer(state) {
+    return state.drawer
   }
 }

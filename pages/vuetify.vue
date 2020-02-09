@@ -30,7 +30,7 @@
       clipped-left
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Voice Flash Cards</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
@@ -49,19 +49,26 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
-    props: {
-      source: String,
+    computed: {
+      ...mapGetters([]),
+      drawer: {
+        get() {
+          return this.$store.state.drawer
+        },
+        set(boolean) {
+          this.$store.commit('setDrawer', boolean)
+        }
+      }
     },
-    data: () => ({
-      drawer: null,
-    }),
     created () {
       this.$vuetify.theme.dark = true
     },
