@@ -34,18 +34,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col class="shrink">
-          </v-col>
-        </v-row>
-      </v-container>
+      <nuxt />
     </v-content>
 
     <v-footer app>
