@@ -7,7 +7,7 @@
       flat
     >
       <v-spacer></v-spacer>
-      <v-toolbar-title>Voice Cards</v-toolbar-title>
+      <v-toolbar-title class="display-2 font-mono font-weight-light">Voice Cards</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
 

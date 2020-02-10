@@ -11,7 +11,7 @@
           elevation="12"
         >
           <v-card-text class="text-center">
-            <span class="text-black">{{ initial }}</span>
+            <span class="black--text display-1 font-mono">{{ initial }}</span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -22,7 +22,7 @@
           elevation="12"
         >
           <v-card-text class="text-center">
-            <span class="text-black">{{ answer }}</span>
+            <span class="black--text">{{ answer }}</span>
           </v-card-text>
         </v-card>
       </v-col>
