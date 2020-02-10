@@ -22,7 +22,7 @@
           elevation="12"
         >
           <v-card-text class="text-center">
-            <span class="black--text">{{ answer }}</span>
+            <span class="black--text display-1 font-mono">{{ answer }}</span>
           </v-card-text>
         </v-card>
       </v-col>
