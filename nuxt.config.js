@@ -1,4 +1,4 @@
-
+import colors from 'vuetify/lib/util/colors'
 export default {
   mode: 'universal',
   /*
@@ -36,7 +36,6 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/vuetify',
   ],
   /*
@@ -53,6 +52,23 @@ export default {
   */
   axios: {
     baseURL: 'http://127.0.0.1:8000/api/v1/'
+  },
+  vuetify: {
+    theme: {
+      dark: true,
+      themes: {
+        light: {
+          primary: colors.purple,
+          secondary: colors.grey.darken1,
+          accent: colors.shades.black,
+          error: colors.red.accent3,
+          background: colors.blue.accent1
+        },
+        dark: {
+          primary: colors.blue.lighten3,
+        },
+      },
+    },
   },
   /*
   ** Build configuration

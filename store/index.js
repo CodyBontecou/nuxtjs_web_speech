@@ -24,7 +24,7 @@ export const mutations = {
     state.iteration += 1
   },
   setAnswer(state, answer) {
-    state.word = answer
+    state.answer = answer
   },
   setInitial(state, initial) {
     state.initial = initial

@@ -1,63 +1,87 @@
 <template>
-  <div class="w-full h-screen p-6 bg-blue-700">
-    <div v-if="compatibleBrowser">
-      <h1 id="title" class="mx-auto pt-6 mb-3 text-center text-4xl text-white">Anki Voice Cards</h1>
-      <h2 class="p-2 text-center text-xl text-gray-400">Say the following word in Spanish</h2>
-
-      <div class="flex pt-20 m-10 text-center justify-around">
-        <div class="w-1/3 p-5 bg-indigo-500 rounded-lg shadow-lg">
-          <p id="initial_word" data-cy="initial_word" class="text-white uppercase tracking-wider font-semibold">
-            {{ initial }}
-          </p>
-        </div>
-        <div class="w-1/3 p-5 bg-indigo-500 rounded-lg shadow-lg">
-          <p id="answer" data-cy="answer" class="text-white uppercase tracking-wider font-semibold">
-            {{ answer }}
-          </p>
-        </div>
-      </div>
-
-      <div class="flex justify-around">
-        <div class="absolute m-5 lg:my-16 lg:mx-8 left-0 bottom-0">
-          <select
-            class="p-3 lg:p-10 text-center text-sm rounded-lg shadow-lg bg-indigo-500 text-white uppercase tracking-wider font-semibold cursor-pointer">
-          </select>
-        </div>
-
-        <div class="absolute m-5 lg:my-16 lg:mx-8 right-0 bottom-0">
-          <a
-            id="begin"
-            data-cy="begin_button"
-            @click="beginSpeechRecognition"
-            class="p-3 lg:p-10 text-sm rounded-lg shadow-lg bg-indigo-500 text-white uppercase tracking-wider font-semibold cursor-pointer">
-            start
-          </a>
-        </div>
-      </div>
-
-    </div>
-    <div v-else>
-      <h1 class="mx-auto pt-6 mb-3 text-center text-4xl text-white">
-        Sorry :(
-        <a
-          href="https://www.google.com/chrome/"
-          style="text-decoration: underline;"
-        >Google Chrome</a
+  <v-container fluid class="fill-height">
+    <v-row align="center"
+           justify="space-around"
+           no-gutters
+    >
+      <v-col cols="12" xs="6" md="4">
+        <v-card
+          class="mx-auto ma-5 pa-5"
+          color="primary"
+          elevation="12"
         >
-        is required.
-      </h1>
-    </div>
-  </div>
+          <v-card-text class="text-center">
+            <span class="text-black">{{ initial }}</span>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" xs="6" md="4">
+        <v-card
+          class="mx-auto ma-5 pa-5"
+          color="primary"
+          elevation="12"
+        >
+          <v-card-text class="text-center">
+            <span class="text-black">{{ answer }}</span>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-speed-dial
+      v-model="fab"
+      bottom
+      right
+      open-on-hover
+      absolute
+      :direction=direction
+      :transition="transition"
+    >
+      <template v-slot:activator>
+        <v-btn
+          v-model="fab"
+          color="blue darken-2"
+          dark
+          fab
+        >
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-icon v-else>mdi-menu</v-icon>
+        </v-btn>
+      </template>
+      <v-btn
+        fab
+        dark
+        small
+        color="primary"
+        @click="beginSpeechRecognition"
+      >
+        <v-icon>mdi-microphone</v-icon>
+      </v-btn>
+    </v-speed-dial>
+  </v-container>
 </template>
 
 <script>
-
-  // TODO: Look into how I get types within vue script tag.
   import {mapGetters} from 'vuex'
 
   export default {
+    layout: 'vuetify',
+    data: () => {
+      return {
+        fab: false,
+        direction: "top",
+        transition: 'slide-y-reverse-transition',
+      }
+    },
     computed: {
-      ...mapGetters(['compatibleBrowser', 'words', 'answer', 'initial', 'iteration'])
+      ...mapGetters(['compatibleBrowser', 'words', 'answer', 'initial', 'iteration']),
+      drawer: {
+        get() {
+          return this.$store.state.drawer
+        },
+        set(boolean) {
+          this.$store.commit('setDrawer', boolean)
+        }
+      }
     },
     mounted() {
       this.checkBrowserCompatibility()
@@ -100,8 +124,12 @@
           that.$store.commit('setAnswer', "I didn't quite catch that.")
         }
 
-        recognition.onerror = function () {
-          that.$store.commit('setAnswer', "Error occurred in recognition")
+        recognition.onerror = function (event) {
+          if (event.error === "network") {
+            that.$store.commit('setAnswer', "Internet is required")
+          } else {
+            that.$store.commit('setAnswer', "Error occurred in recognition")
+          }
         }
       },
       handleIteration() {
